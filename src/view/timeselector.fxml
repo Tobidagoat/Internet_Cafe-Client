@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TimeselectorController">
+   <children>
+      <AnchorPane layoutX="150.0" layoutY="7.0" prefHeight="127.0" prefWidth="500.0" style="-fx-background-color: #92BCFA;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="166.0" layoutY="28.0" text="Select Time" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="11.0" layoutY="73.0" prefHeight="18.0" prefWidth="474.0" text="Choose your extra session time" textFill="WHITE" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.399999999999977">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnaddtime" layoutX="398.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnaddtimeaction" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: #92BCFA; -fx-background-radius: 10;" text="ADD" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="2.0" offsetY="3.0">
+               <color>
+                  
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <AnchorPane fx:id="option2" layoutX="271.0" layoutY="146.0" onMouseClicked="#onclick" onMousePressed="#onpress" onMouseReleased="#onrelease" prefHeight="150.0" prefWidth="200.0" style="-fx-border-width: 1.3; -fx-border-color: #92BCFA; -fx-background-radius: 10px; -fx-border-radius: 10px;" styleClass="time-option" stylesheets="@../css/style.css" AnchorPane.rightAnchor="25.0">
+         <children>
+            <Label layoutX="62.0" layoutY="63.0" text="2 Hours">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="option1" layoutX="32.0" layoutY="146.0" onMouseClicked="#onclick" onMousePressed="#onpress" onMouseReleased="#onrelease" prefHeight="150.0" prefWidth="200.0" style="-fx-border-width: 1.3; -fx-border-color: #92BCFA; -fx-background-radius: 10px; -fx-border-radius: 10px;" styleClass="time-option" stylesheets="@../css/style.css" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="275.0">
+         <children>
+            <Label layoutX="68.0" layoutY="63.0" text="1 Hour">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="option4" layoutX="275.0" layoutY="318.0" onMouseClicked="#onclick" onMousePressed="#onpress" onMouseReleased="#onrelease" prefHeight="150.0" prefWidth="200.0" style="-fx-border-width: 1.3; -fx-border-color: #92BCFA; -fx-background-radius: 10px; -fx-border-radius: 10px;" styleClass="time-option" stylesheets="@../css/style.css">
+         <children>
+            <Label layoutX="23.0" layoutY="64.0" text="Add Custom Time" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="option3" layoutX="25.0" layoutY="318.0" onMouseClicked="#onclick" onMousePressed="#onpress" onMouseReleased="#onrelease" prefHeight="150.0" prefWidth="200.0" style="-fx-border-width: 1.3; -fx-border-color: #92BCFA; -fx-background-radius: 10px; -fx-border-radius: 10px;" styleClass="time-option" stylesheets="@../css/style.css">
+         <children>
+            <Label layoutX="62.0" layoutY="63.0" text="3 Hours">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
