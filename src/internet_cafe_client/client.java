@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class client {
 
-    private static final String CLIENT_NAME = "pc3"; // Change this per machine
+    private static final String CLIENT_NAME = "pc101"; // Change this per machine
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
@@ -112,8 +112,13 @@ public class client {
     }
         } else if (msg.startsWith("TERMINATE")) {
             System.out.println("🛑 Shutdown requested!");
-            HomepageController c=new HomepageController();
-            c.terminatesession();
+            Platform.runLater(() -> {
+            if (controller != null) {
+                controller.terminatesession();
+        } else {
+            System.out.println("❌ Cannot terminate — controller is null.");
+        }
+    });
         } else if (msg.startsWith("ADD_TIME_CONFIRMED|")) {
             String[] parts = msg.split("\\|");
             if (parts.length == 2) {

@@ -35,7 +35,7 @@ public class Internet_Cafe_client extends Application {
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homepage.fxml"));
 //        Parent root = loader.load();
 //        HomepageController controller = loader.getController();
-//        controller.setSessionData("pc3", "1", "Room A", "Standard", 1800); 
+//        controller.setSessionData("pc3", "1", "Room A", "Silver", 1800); 
         
         
         Scene scene = new Scene(root);        

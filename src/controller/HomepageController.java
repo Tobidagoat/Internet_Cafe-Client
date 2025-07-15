@@ -9,11 +9,13 @@ import java.net.URL;
 import java.sql.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.Parent;
@@ -40,8 +42,8 @@ public class HomepageController implements Initializable {
     @FXML private Button btnendsession;
     @FXML private Button btnorderfood;
     @FXML private TextField txtsearchbar;
-    @FXML private FlowPane populargamebox;
-    @FXML private FlowPane latestgamebox;
+    @FXML private FlowPane gamebox;
+    @FXML private FlowPane othersbox;
     
     private client clientinstance;
     private Connection con;
@@ -91,7 +93,16 @@ public class HomepageController implements Initializable {
 
     @FXML
     private void btnendsessionaction(ActionEvent event) throws IOException, SQLException {
-        terminatesession();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Warning");
+        alert.setContentText("U can't Log In Back! Are you sure you want to exit?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        boolean accepted= result.isPresent() && result.get() == ButtonType.OK;
+        
+            if (accepted) {
+                          terminatesession();
+                    }
     }
 
     @FXML
@@ -106,7 +117,7 @@ public class HomepageController implements Initializable {
     private void searchgames(String queryText) {
         final String query = queryText.toLowerCase();
 
-        populargamebox.getChildren().forEach(node -> {
+        gamebox.getChildren().forEach(node -> {
             if (node instanceof AnchorPane) {
                 AnchorPane gameCard = (AnchorPane) node;
                 Label label = (Label) gameCard.lookup("#gamelabel"); // Make sure label inside game card has fx:id="gamelabel"
@@ -118,7 +129,7 @@ public class HomepageController implements Initializable {
             }
         });
 
-        latestgamebox.getChildren().forEach(node -> {
+        othersbox.getChildren().forEach(node -> {
             if (node instanceof AnchorPane) {
                 AnchorPane gameCard = (AnchorPane) node;
                 Label label = (Label) gameCard.lookup("#gamelabel");
@@ -131,10 +142,10 @@ public class HomepageController implements Initializable {
         });
     }
 
-    public void setSessionData(String pcName, String userid, String room, String packageName, int duration) throws SQLException {
+    public void setSessionData(String pcName, String userid, String room, String packageName, int duration) throws SQLException, IOException {
         userId = Integer.parseInt(userid.replaceAll("\\[|\\]", ""));
         pcid = Integer.parseInt(pcName.replaceAll("[^0-9]", ""));
-
+        loadgames(packageName);
         String sql = "SELECT * FROM users WHERE customer_id = ?";
         pst = con.prepareStatement(sql);
         pst.setInt(1, userId);
@@ -148,9 +159,8 @@ public class HomepageController implements Initializable {
 
         lbemail.setText(email);
         lbusername.setText(username);
-
+       
         File file = new File("src/img/"+userimage);
-        System.out.println("The file path is "+file);
         Image image = new Image(file.toURI().toString());
         userprofile.setImage(image);
 
@@ -186,11 +196,7 @@ public class HomepageController implements Initializable {
             if (count[0] <= 0) {
                 lbtimer.setText("Done!");
                 timeline.stop();
-                try {
-                    terminatesession();
-                } catch (IOException | SQLException ex) {
-                    Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                terminatesession();
             }
         }));
 
@@ -198,8 +204,54 @@ public class HomepageController implements Initializable {
         timeline.play();
     }
     
+   public void loadgames(String packagename) throws SQLException, IOException{
+       int packageid=getpackageid(packagename);
+       String sql="select * from games where package_id <= ? ";
+       pst=con.prepareStatement(sql);
+       pst.setInt(1, packageid);
+       rs=pst.executeQuery();
+       while(rs.next()){
+           String gamename=rs.getString("game_name");
+           String companyname=rs.getString("game_company");
+           String genre=rs.getString("game_genre");
+           double rating=rs.getDouble("game_rating");
+           String gameimage=rs.getString("game_icon");
+           String gamebg=rs.getString("game_thumbnail");
+           String desc=rs.getString("game_desc");
+           String path=rs.getString("game_exe_path");
+           String status=rs.getString("game_status");
+           String type=rs.getString("type");
+           FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gamecard.fxml"));
+           AnchorPane card=loader.load();
+           GamecardController cardcontroller=loader.getController();
+
+           cardcontroller.setdata(gamename,companyname,genre,rating,gameimage,gamebg,desc,path,status);
+           if(type.equalsIgnoreCase("games")){
+               gamebox.getChildren().add(card);}
+           else{
+               othersbox.getChildren().add(card);
+           }
+         
+       }
+       
+   }
+
+    
     public void setClient(client c) {
         this.clientinstance = c;
+    }
+    
+    private int getpackageid(String packagename) throws SQLException{
+        int packageid=-1;
+        String sql="select package_id from package where package_type= ?";
+        pst=con.prepareStatement(sql);
+        pst.setString(1, packagename);
+        rs = pst.executeQuery();
+
+        if (rs.next()) {
+            packageid = rs.getInt("package_id");
+        }
+    return packageid;
     }
 
    public void addTime(int extraSeconds) {
@@ -226,23 +278,31 @@ public class HomepageController implements Initializable {
         return String.format("%02d:%02d:%02d", hrs, mins, secs);
     }
 
-    public void terminatesession() throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/test.fxml"));
-        root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.centerOnScreen();
-        stage.show();
-
-        Stage stage2 = (Stage) btnaddtime.getScene().getWindow();
-        stage2.close();
-
-        String sql = "UPDATE sale_detail SET status_id = 3 WHERE customer_id = ? AND pc_id = ?";
-        pst = con.prepareStatement(sql);
-        pst.setInt(1, userId);
-        pst.setInt(2, pcid);
-        pst.executeUpdate();
+    public void terminatesession(){
+        try {
+            if (!Platform.isFxApplicationThread()) {
+                Platform.runLater(this::terminatesession);
+                return;
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/test.fxml"));
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+            stage.show();
+            
+            Stage stage2 = (Stage) btnaddtime.getScene().getWindow();
+            stage2.close();
+            
+            String sql = "UPDATE sale_detail SET status_id = 3 WHERE customer_id = ? AND pc_id = ?";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, userId);
+            pst.setInt(2, pcid);
+            pst.executeUpdate();
+        } catch (IOException ex) {
+            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
-
 }

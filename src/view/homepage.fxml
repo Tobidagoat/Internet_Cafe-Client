@@ -132,12 +132,12 @@
                         <StackPane prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: bbb4d8;" />
                         <VBox prefWidth="100.0" spacing="10.0">
                            <children>
-                              <Label text="Popular Games">
+                              <Label text="Games">
                                  <font>
                                     <Font name="Arial Bold" size="25.0" />
                                  </font>
                               </Label>
-                              <FlowPane fx:id="populargamebox" alignment="CENTER_LEFT" hgap="15.0" prefHeight="358.0" prefWidth="1060.0" vgap="15.0">
+                              <FlowPane fx:id="gamebox" alignment="CENTER_LEFT" hgap="15.0" prefHeight="358.0" prefWidth="1060.0" vgap="15.0">
                                  <padding>
                                     <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                                  </padding></FlowPane>
@@ -145,12 +145,12 @@
                         </VBox>
                         <VBox layoutX="30.0" layoutY="300.0" prefWidth="100.0" spacing="10.0">
                            <children>
-                              <Label text="Latest Games">
+                              <Label text="Others">
                                  <font>
                                     <Font name="Arial Bold" size="25.0" />
                                  </font>
                               </Label>
-                              <FlowPane fx:id="latestgamebox" hgap="15.0" prefHeight="358.0" prefWidth="1060.0" vgap="15.0" />
+                              <FlowPane fx:id="othersbox" hgap="15.0" prefHeight="358.0" prefWidth="1060.0" vgap="15.0" />
                            </children>
                         </VBox>
                      </children>
