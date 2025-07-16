@@ -45,7 +45,7 @@ public class HomepageController implements Initializable {
     @FXML private FlowPane gamebox;
     @FXML private FlowPane othersbox;
     
-    private client clientinstance;
+    private client c;
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
@@ -76,7 +76,7 @@ public class HomepageController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/timeselector.fxml"));
             Parent modalRoot = loader.load();
             TimeselectorController controller=loader.getController();
-            controller.setClient(clientinstance);
+            controller.setClient(c);
             Stage modalStage = new Stage();
             modalStage.setTitle("Add Time");
             modalStage.setScene(new Scene(modalRoot));
@@ -238,7 +238,7 @@ public class HomepageController implements Initializable {
 
     
     public void setClient(client c) {
-        this.clientinstance = c;
+        this.c = c;
     }
     
     private int getpackageid(String packagename) throws SQLException{
@@ -299,6 +299,11 @@ public class HomepageController implements Initializable {
             pst.setInt(1, userId);
             pst.setInt(2, pcid);
             pst.executeUpdate();
+            String sql2 ="update pcs set status_id=1 where pc_id= ?";
+            pst=con.prepareStatement(sql2);
+            pst.setInt(1, pcid);
+            pst.executeUpdate();
+            c.sendToServer("SESSION_END|"+pcid);
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

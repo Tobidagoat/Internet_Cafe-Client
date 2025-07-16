@@ -57,10 +57,6 @@ public class TimeselectorController implements Initializable {
     private void btnaddtimeaction(ActionEvent event) {
         if (selectedtime > 0) {
             c.requestAddTime(selectedtime);
-//        String message = "REQUEST_ADD_TIME|" + selectedtime;
-//        
-//        c.sendToServer(message);
-//        System.out.println("Sent to server: " + message);
         if (modalStage != null) modalStage.close();}
         else {
             JOptionPane.showMessageDialog(null, "Please select a time before confirming.");
