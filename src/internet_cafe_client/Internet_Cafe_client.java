@@ -23,7 +23,7 @@ public class Internet_Cafe_client extends Application {
         new Thread(() -> {
             client c = new client();
              c.setPrimaryStage(stage);
-            c.startClient("localhost", 5000);
+            c.startClient("172.16.201.14", 5000);
         }).start();
         Parent root = FXMLLoader.load(getClass().getResource("/view/test.fxml"));
         
