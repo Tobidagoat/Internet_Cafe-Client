@@ -1,8 +1,10 @@
 package internet_cafe_client;
 
+import controller.HomepageController;
 import controller.TestController;
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -13,12 +15,13 @@ import javafx.stage.Stage;
 
 public class client {
 
-    private static final String CLIENT_NAME = "pc3"; // Change this per machine
+    private static final String CLIENT_NAME = "pc1"; // Change this per machine
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
     private Stage primaryStage;
     private Parent root;
+    private HomepageController controller;
 
     // Start the client and connect to server
     public void startClient(String host, int port) {
@@ -40,7 +43,6 @@ public class client {
         }
     }
 
-    // Handle incoming messages from server
     private void receiveMessages() {
         try {
             String msg;
@@ -49,53 +51,103 @@ public class client {
             }
         } catch (IOException e) {
             System.out.println("❌ Disconnected from server.");
+        } catch (SQLException ex) {
+            Logger.getLogger(client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void sendToServer(String msg) {
+    if (out != null) {
+        out.println(msg);
+        System.out.println("Sent: " + msg);
+    } else {
+        System.out.println("Cannot send message.");
+    }
+}
 
-    // Process command received from server
-    private void handleCommand(String msg) {
+    private void handleCommand(String msg) throws IOException, SQLException {
+
         if (msg.startsWith("UNLOCK|")) {
-            System.out.println("🔓 UNLOCK command received!");
+        System.out.println("🔓 UNLOCK command received!");
 
-            String[] parts = msg.split("\\|");
-            if (parts.length >= 4) {
-                System.out.println("🖥 PC: " + parts[1]);
-                System.out.println("🏠 Room: " + parts[2]);
-                System.out.println(" Package: " + parts[3]);
-                System.out.println("⏱ Duration: " + parts[4]);
-            }
+        String[] parts = msg.split("\\|");
+        if (parts.length >= 6) {
+            String pcName = parts[1];
+            String userid = parts[2];
+            String room = parts[3];
+            String packageName = parts[4];
+            int duration = Integer.parseInt(parts[5]);
 
-            // Switch to test2.fxml on unlock
+            System.out.println("🖥 PC: " + pcName);
+            System.out.println("👤 User: " + userid);
+            System.out.println("🏠 Room: " + room);
+            System.out.println("📦 Package: " + packageName);
+            System.out.println("⏱ Duration: " + duration);
+
+        
             Platform.runLater(() -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/test2.fxml"));
-                    root = loader.load();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homepage.fxml"));
+                root = loader.load();
 
-                    TestController controller = loader.getController();
-                    // If you need to pass anything to controller, do it here
+                controller = loader.getController();                
+                
+                controller.setSessionData(pcName, userid, room, packageName, duration);
+                controller.setClient(this);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.centerOnScreen();
+                stage.show();
 
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
-                    stage.show();
+                if (primaryStage != null) {
+                    primaryStage.close();
+                }
 
-                    if (primaryStage != null) {
-                        primaryStage.close();
-                    }
-
-                } catch (IOException ex) {
+            } catch (IOException ex) {
+                Logger.getLogger(client.class.getName()).log(Level.SEVERE, null, ex);
+            }   catch (SQLException ex) {
                     Logger.getLogger(client.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            });
-
-        } else if (msg.startsWith("SHUTDOWN")) {
+        });
+    }
+        } else if (msg.startsWith("TERMINATE")) {
             System.out.println("🛑 Shutdown requested!");
-            // Optionally: trigger client shutdown or GUI message
+            Platform.runLater(() -> {
+            if (controller != null) {
+                controller.terminatesession();
+        } else {
+            System.out.println("❌ Cannot terminate — controller is null.");
+        }
+    });
+        } else if (msg.startsWith("ADD_TIME_CONFIRMED|")) {
+            String[] parts = msg.split("\\|");
+            if (parts.length == 2) {
+                int extratime = Integer.parseInt(parts[1]);
+                System.out.println("✅ Time add confirmed: +" + extratime + " seconds");
+
+                Platform.runLater(() -> {
+               
+                if (controller != null) {
+                    controller.addTime(extratime);
+                } else {
+                    System.out.println("❌ HomepageController is null!");
+                }
+            });
+            }
         } else {
             System.out.println("📩 Server says: " + msg);
         }
     }
+    
+    public void requestAddTime(int minutes) {
+    if (out != null) {
+        String message = "REQUEST_ADD_TIME|"  + minutes;
+        out.println(message);
+        System.out.println("⏳ Sent time add request: " + minutes + " seconds");
+    }
+}
 
-    // Set the main stage (for closing during unlock)
+    
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
     }

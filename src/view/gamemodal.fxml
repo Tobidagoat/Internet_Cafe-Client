@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="697.0" prefWidth="758.0" style="-fx-background-color: #2E325C;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controller.GamemodalController">
+   <children>
+      <ImageView fx:id="imggamebg" fitHeight="309.0" fitWidth="758.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../../../Pictures/games/wuthering.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imggame" fitHeight="348.0" fitWidth="242.0" layoutX="33.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Pictures/games/wuwa.jpg" />
+         </image>
+         <effect>
+            <DropShadow offsetX="4.0" offsetY="5.0">
+               <color>
+               </color>
+            </DropShadow>
+         </effect>
+      </ImageView>
+      <Label fx:id="lbgamename" layoutX="327.0" layoutY="318.0" text="Wuthering Wave" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnplay" layoutX="327.0" layoutY="410.0" mnemonicParsing="false" onAction="#btnplayaction" prefHeight="42.0" prefWidth="203.0" style="-fx-background-color: ff7f1a; -fx-background-radius: 10;" text="Play Now" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="lbdesc" alignment="TOP_LEFT" layoutX="327.0" layoutY="523.0" lineSpacing="2.0" prefHeight="160.0" prefWidth="374.0" text="Wuthering Waves is a story-rich open-world action RPG with a high degree of freedom. You wake from your slumber as Rover, joined by a vibrant cast of Resonators on a journey to reclaim your lost memories and change the world." textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="327.0" layoutY="486.0" text="Game Description :" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="570.0" text="Developer : " textFill="WHITE">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="603.0" text="Rating : " textFill="WHITE">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="635.0" text="Genre : " textFill="WHITE">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbcompanyname" layoutX="327.0" layoutY="357.0" text="Kuro Games" textFill="#ffffffab">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbcompany" alignment="CENTER_RIGHT" layoutX="137.0" layoutY="571.0" prefHeight="16.0" prefWidth="138.0" text="Kuro Games" textFill="#6ca8ec">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbrating" alignment="CENTER_RIGHT" layoutX="137.0" layoutY="604.0" prefHeight="16.0" prefWidth="138.0" text="4.9" textFill="#6ca8ec">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbgenre" alignment="CENTER_RIGHT" layoutX="137.0" layoutY="636.0" prefHeight="16.0" prefWidth="138.0" text="RPG" textFill="#6ca8ec">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

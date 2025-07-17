@@ -4,6 +4,7 @@
  */
 package internet_cafe_client;
 
+import controller.HomepageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,10 +26,19 @@ public class Internet_Cafe_client extends Application {
              c.setPrimaryStage(stage);
             c.startClient("172.16.201.14", 5000);
         }).start();
+        
+        
+        
         Parent root = FXMLLoader.load(getClass().getResource("/view/test.fxml"));
         
-        Scene scene = new Scene(root);
+        //testing code
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homepage.fxml"));
+//        Parent root = loader.load();
+//        HomepageController controller = loader.getController();
+//        controller.setSessionData("pc3", "1", "Room A", "Silver", 1800); 
         
+        
+        Scene scene = new Scene(root);        
         stage.setScene(scene);
         stage.show();
         
