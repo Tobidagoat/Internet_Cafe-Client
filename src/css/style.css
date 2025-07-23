@@ -48,3 +48,17 @@
     -fx-border-radius: 12;
     -fx-background-radius: 12;
 }
+.overlay-pane {
+    -fx-background-color: transparent;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.7), 0, 0, 0, 0);
+}
+
+.overlay-pane .blur-gradient {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.3) 30%, 
+        rgba(255,255,255,0.7) 100%);
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 20, 0.5, 0, 0);
+}
