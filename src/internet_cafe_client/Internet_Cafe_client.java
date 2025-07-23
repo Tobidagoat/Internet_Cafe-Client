@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -29,15 +30,13 @@ public class Internet_Cafe_client extends Application {
         
         
         
-        Parent root = FXMLLoader.load(getClass().getResource("/view/test.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/view/Default.fxml"));
         
         //testing code
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homepage.fxml"));
-//        Parent root = loader.load();
-//        HomepageController controller = loader.getController();
-//        controller.setSessionData("pc3", "1", "Room A", "Silver", 1800); 
         
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Default.fxml"));
         
+        Parent root = loader.load(); 
         Scene scene = new Scene(root);        
         stage.setScene(scene);
         stage.show();

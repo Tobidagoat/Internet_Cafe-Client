@@ -14,130 +14,124 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomepageController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1600.0" styleClass="content_anchor_pane" stylesheets="@../css/fx_style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomepageController">
    <children>
-      <AnchorPane prefHeight="800.0" prefWidth="150.0" style="-fx-background-color: #f3bbb1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1449.6" AnchorPane.topAnchor="0.0" />
-      <VBox alignment="TOP_CENTER" layoutX="1403.2" prefHeight="800.0" prefWidth="197.0" spacing="10.0" style="-fx-background-color: f3bbb1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="1096.0" layoutY="14.0" prefHeight="800.0" prefWidth="351.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1050.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: bbb4d8; -fx-background-radius: 14px;">
+            <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="362.0" spacing="10.0" style="-fx-background-color: f3bbb1;">
                <children>
-                  <Label fx:id="lbemail" text="usertheclown@gmail.com">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                  </Label>
-               </children></HBox>
-            <VBox alignment="CENTER" prefHeight="180.0" prefWidth="329.0" spacing="15.0" stylesheets="@../css/style.css">
-               <children>
-                  <ImageView fx:id="userprofile" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
-                     <image>
-                        <Image url="@../../../../../Pictures/My%20reaction/FB_IMG_1669276215957.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="lbusername" alignment="CENTER" prefHeight="27.0" prefWidth="318.0" styleClass="profile-name" text="User" textAlignment="CENTER" wrapText="true" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="185.0" prefWidth="329.0" spacing="20.0">
-               <children>
-                  <Label text="Current Session">
-                     <font>
-                        <Font name="Arial Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lbtimer" layoutX="160.0" layoutY="101.0" text="02:02:40" textAlignment="CENTER">
-                     <font>
-                        <Font name="Arial Bold" size="50.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="160.0" layoutY="110.0" text="Time Remaining">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font>
-                  </Label>
-               </children></VBox>
-            <AnchorPane prefHeight="320.0" prefWidth="329.0">
-               <children>
-                  <AnchorPane prefHeight="87.0" prefWidth="150.0" style="-fx-background-color: bbb4d8; -fx-background-radius: 10px;" AnchorPane.rightAnchor="178.4">
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: bbb4d8; -fx-background-radius: 14px;">
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Started:" textFill="#5e5e5e">
+                        <Label fx:id="lbemail" text="usertheclown@gmail.com">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbstarttime" layoutX="40.0" layoutY="44.0" text="14:30">
-                           <font>
-                              <Font name="Arial Bold" size="20.0" />
-                           </font>
-                        </Label>
                      </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="178.0" prefHeight="87.0" prefWidth="150.0" style="-fx-background-color: bbb4d8; -fx-background-radius: 10;">
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="180.0" prefWidth="329.0" spacing="15.0" stylesheets="@../css/style.css">
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Ended:" textFill="#5e5e5e">
-                           <font>
-                              <Font name="Arial" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbendtime" layoutX="48.0" layoutY="44.0" text="16:45">
-                           <font>
-                              <Font name="Arial Bold" size="20.0" />
-                           </font>
-                        </Label>
+                        <ImageView fx:id="userprofile" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
+                           <image>
+                              <Image url="@../../../../../Pictures/My%20reaction/FB_IMG_1669276215957.jpg" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lbusername" alignment="CENTER" prefHeight="27.0" prefWidth="318.0" styleClass="profile-name" text="User" textAlignment="CENTER" wrapText="true" />
                      </children>
-                  </AnchorPane>
-                  <AnchorPane layoutY="106.0" prefHeight="112.0" prefWidth="329.0" style="-fx-background-color: bbb4d8; -fx-background-radius: 10;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="185.0" prefWidth="329.0" spacing="20.0">
                      <children>
-                        <Label layoutX="110.0" layoutY="14.0" text="Current Room" textFill="#5e5e5e">
-                           <font>
-                              <Font name="Arial" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbroomindicator" alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="56.0" prefHeight="23.0" prefWidth="107.0" text="Room-69" textAlignment="CENTER">
+                        <Label text="Current Session">
                            <font>
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Label>
+                        <Label fx:id="lbtimer" layoutX="160.0" layoutY="101.0" text="02:02:40" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="50.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="160.0" layoutY="110.0" text="Time Remaining">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <AnchorPane prefHeight="320.0" prefWidth="329.0">
+                     <children>
+                        <AnchorPane prefHeight="87.0" prefWidth="150.0" style="-fx-background-color: bbb4d8; -fx-background-radius: 10px;" AnchorPane.rightAnchor="178.4">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Started:" textFill="#5e5e5e">
+                                 <font>
+                                    <Font name="Arial" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbstarttime" layoutX="40.0" layoutY="44.0" text="14:30">
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="178.0" prefHeight="87.0" prefWidth="150.0" style="-fx-background-color: bbb4d8; -fx-background-radius: 10;">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Ended:" textFill="#5e5e5e">
+                                 <font>
+                                    <Font name="Arial" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbendtime" layoutX="48.0" layoutY="44.0" text="16:45">
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutY="106.0" prefHeight="112.0" prefWidth="329.0" style="-fx-background-color: bbb4d8; -fx-background-radius: 10;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Label layoutX="110.0" layoutY="14.0" text="Current Room" textFill="#5e5e5e">
+                                 <font>
+                                    <Font name="Arial" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbroomindicator" alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="56.0" prefHeight="23.0" prefWidth="107.0" text="Room-69" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Button fx:id="btnaddtime" layoutY="234.0" mnemonicParsing="false" onAction="#btnaddtimeaction" prefHeight="34.0" prefWidth="163.0" text="Add Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="179.2" />
+                        <Button fx:id="btnendsession" layoutX="178.0" layoutY="234.0" mnemonicParsing="false" onAction="#btnendsessionaction" prefHeight="34.0" prefWidth="150.0" text="End Session" />
+                        <Button fx:id="btnorderfood" layoutY="283.0" mnemonicParsing="false" onAction="#btnorderfoodaction" prefHeight="34.0" prefWidth="243.0" text="Order Food" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
-                  <Button fx:id="btnaddtime" layoutY="234.0" mnemonicParsing="false" onAction="#btnaddtimeaction" prefHeight="34.0" prefWidth="163.0" text="Add Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="179.2" />
-                  <Button fx:id="btnendsession" layoutX="178.0" layoutY="234.0" mnemonicParsing="false" onAction="#btnendsessionaction" prefHeight="34.0" prefWidth="150.0" text="End Session" />
-                  <Button fx:id="btnorderfood" layoutY="283.0" mnemonicParsing="false" onAction="#btnorderfoodaction" prefHeight="34.0" prefWidth="243.0" text="Order Food" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               </children>
-            </AnchorPane>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
-      <VBox layoutX="851.0" layoutY="171.0" prefHeight="800.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: bbb4d8;">
-               <children>
-                  <TextField fx:id="txtsearchbar" onAction="#txtsearchaction" prefHeight="34.0" prefWidth="1055.0" promptText="Search Games">
-                     <font>
-                        <Font name="Arial" size="16.0" />
-                     </font>
-                  </TextField>
                </children>
                <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding></HBox>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="720.0" prefWidth="1100.0">
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <VBox layoutX="1.6" layoutY="88.8" prefHeight="715.0" prefWidth="1063.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="349.0" AnchorPane.topAnchor="85.0">
+         <children>
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="903.0" prefWidth="1281.0">
                <content>
-                  <VBox prefWidth="1100.0" spacing="20.0">
+                  <VBox prefHeight="1129.0" prefWidth="1060.0" spacing="20.0">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <children>
                         <StackPane prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: bbb4d8;" />
-                        <VBox prefWidth="100.0" spacing="10.0">
+                        <VBox prefHeight="399.0" prefWidth="1005.0" spacing="10.0">
                            <children>
                               <Label text="Games">
                                  <font>
                                     <Font name="Arial Bold" size="25.0" />
                                  </font>
                               </Label>
-                              <FlowPane fx:id="gamebox" alignment="CENTER_LEFT" hgap="15.0" prefHeight="358.0" prefWidth="1060.0" vgap="15.0">
+                              <FlowPane fx:id="gamebox" alignment="CENTER_LEFT" hgap="15.0" prefHeight="358.0" prefWidth="1006.0" vgap="15.0">
                                  <padding>
                                     <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                                  </padding></FlowPane>
@@ -159,5 +153,14 @@
             </ScrollPane>
          </children>
       </VBox>
+      <AnchorPane layoutX="1.6" layoutY="14.0" prefHeight="87.0" prefWidth="1062.0" style="-fx-background-color: yellow;" styleClass="search_bar_container" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TextField fx:id="txtsearchbar" layoutX="-70.0" layoutY="30.0" onAction="#txtsearchaction" prefHeight="34.0" prefWidth="1055.0" promptText="Search Games" styleClass="search_bar" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

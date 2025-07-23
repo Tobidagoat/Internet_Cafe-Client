@@ -1,0 +1,257 @@
+
+.background_anchor_pane{
+    -fx-background-color:#202225;
+    -fx-pref-width:1550px;
+    -fx-pref-height:800px;
+
+}
+
+.content_anchor_pane{
+    -fx-background-color:#202225;
+    -fx-pref-width:1400px;
+    -fx-pref-height:800px;
+    -fx-border-width: 0 0 0  1px;
+    -fx-border-color:#494949;
+
+}
+.sidebar_anchor_pane{
+    -fx-background-color:#292b2f;
+    -fx-pref-width:150px;
+    -fx-pref-height:800px;
+    -fx-border-width:0 1px 0 0;
+    -fx-border-color:#494949;
+   
+}
+.search_bar_container{
+    
+    -fx-pref-width:1050px;
+    -fx-pref-height:85px;
+   
+}
+.search_bar{
+    -fx-pref-width:1000px;
+    -fx-pref-height:35px;
+    
+}
+.food_tag_btn{
+    -fx-pref-width:80px;
+    -fx-pref-height:40px;
+    -fx-pref-height:40px;
+    -fx-border-radius: 40px;
+    -fx-border-width: 1px;
+    -fx-border-color: rgb(255, 106, 0);
+    -fx-background-radius: 40px;
+    -fx-background-color: #202225;
+    -fx-text-fill: rgb(255, 106, 0);
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    
+}
+.blur-pane {
+    
+
+    /* Gradient background: black at bottom, transparent at top */
+    -fx-background-color: linear-gradient(to top, rgba(0,0,0,1), rgba(0, 0, 0, 0.136));
+
+   
+}
+.foodcard{
+    
+    -fx-pref-width: 250px;
+    -fx-pref-height:400px;
+    -fx-font-size: 16px;
+    
+    -fx-border-width: 1px;
+    -fx-border-color: #92BCFA;
+    /* -fx-border-radius: 10px;
+    -fx-background-radius: 10px; */
+    -fx-background-color:  #191919; /*#212121*/
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+    -fx-background-insets: 0;     /* No extra insets */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.2, 0, 3);
+    -fx-border-color: rgba(255, 255, 255, 0.15); /* Subtle border */
+    -fx-border-width: 1;
+}
+.price_label{
+    -fx-font-size: 25px;
+    
+}
+.foodcard:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 15, 0.3, 0, 5);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-cursor: hand;
+}
+
+.foodcard_img{
+    -fx-pref-width: 250px;
+    -fx-pref-height:250px;
+     -fx-border-radius: 10px 0 10px 0;
+      -fx-background-radius: 10px 0 10px 0;
+
+}
+.amount_btn{
+    -fx-pref-width: 30px;
+    -fx-pref-height:30px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-color:rgba(32, 32, 32, 0.344);
+    -fx-border-width: 1px;
+    -fx-border-color: rgb(255, 106, 0);
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, transparent, 0, 0, 0, 0);
+    -fx-padding: 0 0 0 0;
+    -fx-background-insets: 0 0 0 0;
+
+}
+.amount_btn:hover{
+   -fx-background-color:rgb(255, 106, 0);
+   -fx-text-fill: #000000;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+
+.amount_btn:pressed {
+    -fx-background-color: rgb(230, 90, 0);
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+.addcart_btn {
+    -fx-pref-width: 80px;
+    -fx-pref-height: 35px;
+    -fx-background-color: rgb(255, 106, 0);
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand; /* Shows pointer on hover */
+    
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    -fx-transition: all 0.2s ease; /* smooth animation */
+}
+
+.addcart_btn:hover {
+    -fx-background-color: rgb(196, 82, 0);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.addcart_btn:pressed {
+    -fx-background-color: rgb(230, 90, 0);
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+.food_scroll_pane{
+    -fx-background-color:#7c3a0e;
+    -fx-pref-width:1400px;
+   
+    
+}
+.food_scroll_pane .scroll_bar:vertical{
+    -fx-background-color: transparent;
+    -fx-pref-width: 10px;
+
+}
+.ordercard{
+     -fx-pref-width: 400px;
+    -fx-pref-height: 500px;
+    -fx-background-color:#F8A145; 
+    -fx-border-radius:15px;
+    -fx-background-radius:15px;
+
+
+}
+.ordercard_btn_reset {
+    -fx-pref-width: 120px;
+    -fx-pref-height: 35px;
+    -fx-background-color: white;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 13px;
+    -fx-border-color: #d40000;
+    -fx-border-width: 1px;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 2);
+    -fx-text-fill: #d40000;
+    -fx-cursor: hand;
+}
+
+.ordercard_btn_reset:hover {
+    -fx-background-color: #ffe9db; /* soft orange hover */
+}
+
+.ordercard_btn_reset:pressed {
+    -fx-background-color: #ffd3b5; /* deeper orange when pressed */
+    -fx-translate-y: 2px;          /* subtle button press effect */
+}
+
+.ordercard_btn_submit {
+    -fx-pref-width: 120px;
+    -fx-pref-height: 35px;
+    -fx-background-color: #c95618;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #c95618;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 2);
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.ordercard_btn_submit:hover {
+    -fx-background-color: #e66d33; /* brighter hover */
+}
+
+.ordercard_btn_submit:pressed {
+    -fx-background-color: #b3470d; /* darker pressed */
+    -fx-translate-y: 2px;          /* subtle button press effect */
+}
+
+.scroll-pane {
+    -fx-background-color: transparent; /* No background */
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Vertical Scrollbar */
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 10px; /* width of the bar */
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: transparent; /* green thumb */
+    -fx-background-radius: 5px;
+    -fx-background-insets: 2;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent; /* track color */
+    -fx-background-radius: 5px;
+}
+
+/* Hide scrollbar arrows (increment/decrement buttons) */
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-opacity: 0;      /* make transparent */
+    -fx-padding: 0;      /* remove extra space */
+    -fx-shape: "";       /* remove arrow shape */
+    -fx-background-color: transparent;
+    -fx-min-height: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}
+
+
+.selected-food-tag {
+    -fx-background-color: rgb(255, 106, 0); /* yellow */
+    -fx-text-fill: #ffffff; /* black text */
+}
+
+
+

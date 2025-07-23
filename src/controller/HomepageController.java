@@ -58,12 +58,16 @@ public class HomepageController implements Initializable {
     public int[] count;
     private Timeline timeline;
     private boolean[] reminded = { false };
+    
+    private String searchg="";
+    private String pkname;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DbConnection db = new DbConnection();
         try {
             con = db.getConnection();
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -107,11 +111,14 @@ public class HomepageController implements Initializable {
 
     @FXML
     private void btnorderfoodaction(ActionEvent event) {
+        
     }
 
     @FXML
-    private void txtsearchaction(ActionEvent event) {
-        searchgames(txtsearchbar.getText());
+    private void txtsearchaction(ActionEvent event) throws SQLException, IOException {
+        searchg = txtsearchbar.getText();
+        loadgames(pkname);
+        
     }
 
     private void searchgames(String queryText) {
@@ -143,6 +150,7 @@ public class HomepageController implements Initializable {
     }
 
     public void setSessionData(String pcName, String userid, String room, String packageName, int duration) throws SQLException, IOException {
+        this.pkname = packageName;
         userId = Integer.parseInt(userid.replaceAll("\\[|\\]", ""));
         pcid = Integer.parseInt(pcName.replaceAll("[^0-9]", ""));
         loadgames(packageName);
@@ -205,11 +213,23 @@ public class HomepageController implements Initializable {
     }
     
    public void loadgames(String packagename) throws SQLException, IOException{
+       
+       gamebox.getChildren().clear();
+       othersbox.getChildren().clear();
        int packageid=getpackageid(packagename);
-       String sql="select * from games where package_id <= ? ";
-       pst=con.prepareStatement(sql);
-       pst.setInt(1, packageid);
-       rs=pst.executeQuery();
+      if(searchg.isEmpty()){
+           String sql="select * from games where package_id <= ? ";
+            pst=con.prepareStatement(sql);
+            pst.setInt(1, packageid);
+            rs=pst.executeQuery();
+      }else{
+          String sql = "select * from games where package_id <= ? && game_name like ? ";
+          pst=con.prepareStatement(sql);
+          pst.setInt(1, packageid);
+          pst.setString(2, "%"+ searchg+"%");
+          rs=pst.executeQuery();
+      }
+      
        while(rs.next()){
            String gamename=rs.getString("game_name");
            String companyname=rs.getString("game_company");
@@ -244,7 +264,7 @@ public class HomepageController implements Initializable {
     private int getpackageid(String packagename) throws SQLException{
         int packageid=-1;
         String sql="select package_id from package where package_type= ?";
-        pst=con.prepareStatement(sql);
+         pst=con.prepareStatement(sql);
         pst.setString(1, packagename);
         rs = pst.executeQuery();
 
