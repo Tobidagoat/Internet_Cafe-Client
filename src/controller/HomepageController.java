@@ -54,6 +54,8 @@ public class HomepageController implements Initializable {
     private String username;
     private String email;
     private String userimage;
+    private int orgduration;
+    private int addduration;
     private Parent root;
     public int[] count;
     private Timeline timeline;
@@ -96,7 +98,7 @@ public class HomepageController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Warning");
         alert.setContentText("U can't Log In Back! Are you sure you want to exit?");
-
+        
         Optional<ButtonType> result = alert.showAndWait();
         boolean accepted= result.isPresent() && result.get() == ButtonType.OK;
         
@@ -254,12 +256,20 @@ public class HomepageController implements Initializable {
     return packageid;
     }
 
-   public void addTime(int extraSeconds) {
+   public void addTime(int extraSeconds) throws SQLException {
     if (count != null && count.length > 0) {
         count[0] += extraSeconds;
         lbtimer.setText(formatTime(count[0]));
         System.out.println("🕒 Added " + extraSeconds + " seconds. New total: " + count[0] + " seconds");
-
+        
+        addduration=converttohour(extraSeconds);
+        getperiod();
+        String sql="UPDATE sale_detail SET period = ? WHERE customer_id = ? AND pc_id = ? AND Status_id = 2";
+        pst=con.prepareStatement(sql);
+        pst.setInt(1, orgduration+addduration);
+        pst.setInt(2, userId);
+        pst.setInt(3, pcid);
+        pst.executeUpdate();
         // Update the end time label based on new time
         LocalTime now = LocalTime.now();
         LocalTime newEndTime = now.plusSeconds(count[0]);
@@ -276,6 +286,22 @@ public class HomepageController implements Initializable {
         int mins = (seconds % 3600) / 60;
         int secs = seconds % 60;
         return String.format("%02d:%02d:%02d", hrs, mins, secs);
+    }
+    
+    public int converttohour(int seconds) {
+        return seconds / 3600;
+    }
+    
+    private void getperiod() throws SQLException{
+        String gettime="Select period from sale_detail where customer_id = ? and pc_id = ? and status_id = 2";
+        pst=con.prepareStatement(gettime);
+        pst.setInt(1, userId);
+        pst.setInt(2, pcid);
+        rs=pst.executeQuery();
+        if(rs.next()){
+            orgduration=rs.getInt("period");
+        }
+        System.out.println("Original period is "+orgduration);
     }
 
     public void terminatesession(){
@@ -294,7 +320,7 @@ public class HomepageController implements Initializable {
             Stage stage2 = (Stage) btnaddtime.getScene().getWindow();
             stage2.close();
             
-            String sql = "UPDATE sale_detail SET status_id = 3 WHERE customer_id = ? AND pc_id = ?";
+            String sql = "UPDATE sale_detail SET status_id = 3 WHERE customer_id = ? AND pc_id = ? AND status_id = 2";
             pst = con.prepareStatement(sql);
             pst.setInt(1, userId);
             pst.setInt(2, pcid);

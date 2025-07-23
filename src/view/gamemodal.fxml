@@ -3,20 +3,24 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="697.0" prefWidth="758.0" style="-fx-background-color: #2E325C;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controller.GamemodalController">
+<AnchorPane id="AnchorPane" prefHeight="697.0" prefWidth="758.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GamemodalController">
    <children>
-      <ImageView fx:id="imggamebg" fitHeight="309.0" fitWidth="758.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="imggamebg" fitHeight="390.0" fitWidth="758.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../../../../../Pictures/games/wuthering.jpg" />
+            <Image url="@../../../../../Pictures/valorant-bg.jpg" />
          </image>
       </ImageView>
+      <AnchorPane id="overlay-pane" layoutY="243.0" prefHeight="150.0" prefWidth="758.0" style="-fx-background-color: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.4));" stylesheets="@../css/style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.7999999999999545">
+         <effect>
+            <GaussianBlur radius="48.28" />
+         </effect>
+      </AnchorPane>
       <ImageView fx:id="imggame" fitHeight="348.0" fitWidth="242.0" layoutX="33.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../Pictures/games/wuwa.jpg" />
@@ -33,7 +37,7 @@
             <Font name="Arial Bold" size="25.0" />
          </font>
       </Label>
-      <Button fx:id="btnplay" layoutX="327.0" layoutY="410.0" mnemonicParsing="false" onAction="#btnplayaction" prefHeight="42.0" prefWidth="203.0" style="-fx-background-color: ff7f1a; -fx-background-radius: 10;" text="Play Now" textFill="WHITE">
+      <Button fx:id="btnplay" layoutX="327.0" layoutY="410.0" mnemonicParsing="false" onAction="#btnplayaction" prefHeight="42.0" prefWidth="203.0" style="-fx-background-color: orange; -fx-background-radius: 10;" text="Play Now" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>

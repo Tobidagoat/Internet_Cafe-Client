@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class client {
 
-    private static final String CLIENT_NAME = "pc1"; // Change this per machine
+    private static final String CLIENT_NAME = "pc101"; // Change this per machine
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
@@ -128,7 +128,11 @@ public class client {
                 Platform.runLater(() -> {
                
                 if (controller != null) {
-                    controller.addTime(extratime);
+                    try {
+                        controller.addTime(extratime);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(client.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else {
                     System.out.println("❌ HomepageController is null!");
                 }
