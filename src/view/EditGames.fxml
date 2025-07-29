@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" fx:id="editGameRootPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #202225; -fx-border-color: grey; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../css/fx_style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditGamesController">
+   <children>
+      <Label layoutX="47.0" layoutY="71.0" prefHeight="25.0" prefWidth="70.0" text="Name    :" textFill="WHITE" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="115.0" prefHeight="25.0" prefWidth="70.0" text="Path      :" textFill="WHITE" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="120.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="174.0" prefHeight="25.0" prefWidth="70.0" text="Profile   :" textFill="WHITE" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="180.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="231.0" prefHeight="25.0" prefWidth="70.0" text="Banner  :" textFill="WHITE" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="183.0" layoutY="71.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="60.0">
+         <contextMenu>
+            <ContextMenu fx:id="suggestionMenu">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+              </items>
+            </ContextMenu>
+         </contextMenu></TextField>
+      <Button fx:id="btnSave" layoutX="225.0" layoutY="322.0" mnemonicParsing="false" onAction="#HandleSaveAction" prefHeight="36.0" prefWidth="92.0" style="-fx-background-color: #ff6a00; -fx-background-radius: 10; -fx-border-radius: 10;" text="Save" textFill="WHITE" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="325.0" />
+      <Button fx:id="btnCancel" layoutX="82.0" layoutY="322.0" mnemonicParsing="false" onAction="#HandleCancelAction" prefHeight="36.0" prefWidth="92.0" style="-fx-border-color: #ff6a00; -fx-background-color: #202225; -fx-background-radius: 10; -fx-border-radius: 10;" text="Cancel" textFill="WHITE" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="325.0" />
+      <TextField fx:id="txtPath" editable="false" layoutX="183.0" layoutY="115.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="120.0" />
+      <TextField fx:id="txtProfile" editable="false" layoutX="183.0" layoutY="174.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="180.0" />
+      <TextField fx:id="txtBanner" editable="false" layoutX="183.0" layoutY="231.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="240.0" />
+      <Button fx:id="btnPath" layoutX="334.0" layoutY="120.0" mnemonicParsing="false" onAction="#HandlePathAction" prefHeight="26.0" prefWidth="27.0" styleClass="transparent-btn" text="Button" AnchorPane.topAnchor="120.0" />
+      <Button fx:id="btnProfile" layoutX="334.0" layoutY="179.0" mnemonicParsing="false" onAction="#HandleProfileAction" prefHeight="26.0" prefWidth="27.0" styleClass="transparent-btn" text="Button" />
+      <Button fx:id="btnBanner" layoutX="334.0" layoutY="239.0" mnemonicParsing="false" onAction="#HandleBannerAction" prefHeight="26.0" prefWidth="27.0" styleClass="transparent-btn" text="Button" />
+      <FontIcon disable="true" iconColor="#ff6a00" iconLiteral="fa-edit" iconSize="21" layoutX="341.0" layoutY="142.0" wrappingWidth="13.600024414062545" />
+      <FontIcon disable="true" iconColor="#ff6a00" iconLiteral="fa-edit" iconSize="21" layoutX="341.0" layoutY="201.0" wrappingWidth="13.600024414062545" />
+      <FontIcon disable="true" iconColor="#ff6a00" iconLiteral="fa-edit" iconSize="21" layoutX="341.0" layoutY="261.0" wrappingWidth="13.600024414062545" />
+      <Label fx:id="txtpatherror" layoutX="159.0" layoutY="147.0" textFill="RED" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="150.0" />
+      <Label fx:id="txtprofileerror" layoutX="160.0" layoutY="206.0" textFill="RED" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="210.0" />
+      <Label fx:id="txtbannererror" layoutX="160.0" layoutY="266.0" textFill="RED" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="270.0" />
+      <Button fx:id="btnAddGames" layoutX="334.0" layoutY="15.0" mnemonicParsing="false" onAction="#HandleAddGamesAction" prefHeight="18.0" prefWidth="27.0" style="-fx-background-color: transparent;" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Label layoutX="245.0" layoutY="14.0" prefHeight="26.0" prefWidth="84.0" text="Add New Game:" textFill="WHITE">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <FontIcon disable="true" iconColor="#ff6a00" iconLiteral="fa-plus-circle" iconSize="25" layoutX="338.0" layoutY="36.0" wrappingWidth="27.200000000000045" />
+   </children>
+</AnchorPane>

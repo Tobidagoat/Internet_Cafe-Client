@@ -57,12 +57,7 @@
             <Font name="Arial" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="33.0" layoutY="603.0" text="Rating : " textFill="WHITE">
-         <font>
-            <Font name="Arial" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="33.0" layoutY="635.0" text="Genre : " textFill="WHITE">
+      <Label layoutX="33.0" layoutY="609.0" text="Genre : " textFill="WHITE" AnchorPane.topAnchor="605.0">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
@@ -77,12 +72,7 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lbrating" alignment="CENTER_RIGHT" layoutX="137.0" layoutY="604.0" prefHeight="16.0" prefWidth="138.0" text="4.9" textFill="#6ca8ec">
-         <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbgenre" alignment="CENTER_RIGHT" layoutX="137.0" layoutY="636.0" prefHeight="16.0" prefWidth="138.0" text="RPG" textFill="#6ca8ec">
+      <Label fx:id="lbgenre" alignment="CENTER_RIGHT" layoutX="137.0" layoutY="610.0" prefHeight="16.0" prefWidth="138.0" text="RPG" textFill="#6ca8ec" AnchorPane.topAnchor="605.0">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

@@ -15,7 +15,19 @@ import javafx.stage.Stage;
 
 public class client {
 
-    private static final String CLIENT_NAME = "pc101"; // Change this per machine
+    private String clientName;
+    private String host;
+    private int port;
+
+    public client() {
+    ConfigManager config = new ConfigManager();
+    this.clientName = config.getPcId();
+     this.host = config.getHost();
+    this.port = config.getPort();
+    }
+ // Change this per machine
+    
+    
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
@@ -24,15 +36,17 @@ public class client {
     private HomepageController controller;
 
     // Start the client and connect to server
-    public void startClient(String host, int port) {
+    public void startClient() {
         try {
             socket = new Socket(host, port);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
 
             // Send client name to server
-            out.println(CLIENT_NAME);
-            System.out.println("✅ Connected to server as: " + CLIENT_NAME);
+          out.println(clientName);
+        System.out.println("✅ Connected to server as: " + clientName +
+                           " (Host: " + host + ", Port: " + port + ")");
+
 
             // Start listening for messages from server
             new Thread(this::receiveMessages).start();

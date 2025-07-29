@@ -38,8 +38,8 @@ public class GamemodalController implements Initializable {
     private Label lbcompanyname;
     @FXML
     private Label lbcompany;
-    @FXML
-    private Label lbrating;
+//    @FXML
+//    private Label lbrating;
     @FXML
     private Label lbgenre;
     
@@ -69,12 +69,12 @@ public class GamemodalController implements Initializable {
         }
     }
     
-    public void setdata(String gamename, String companyname, String genre, double rating, String gameimage, String gamebg, String desc, String path, String status){
+    public void setdata(String gamename, String companyname, String genre, String gameimage, String gamebg, String desc, String path, String status){
         lbgamename.setText(gamename);
         lbcompany.setText(companyname);
         lbcompanyname.setText(companyname);
         lbgenre.setText(genre);
-        lbrating.setText(String.valueOf(rating));
+//        lbrating.setText(String.valueOf(rating));
         lbdesc.setText(desc);
         this.path=path;
         File game = new File("src/img/"+gameimage);

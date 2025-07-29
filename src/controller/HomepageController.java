@@ -45,6 +45,9 @@ public class HomepageController implements Initializable {
     @FXML private FlowPane gamebox;
     @FXML private FlowPane othersbox;
     
+    @FXML
+    private ScrollPane scrollpp;
+    
     private client c;
     private Connection con;
     private PreparedStatement pst;
@@ -118,6 +121,7 @@ public class HomepageController implements Initializable {
 
     @FXML
     private void txtsearchaction(ActionEvent event) throws SQLException, IOException {
+        scrollpp.setVvalue(0);
         searchg = txtsearchbar.getText();
         loadgames(pkname);
         
@@ -236,7 +240,7 @@ public class HomepageController implements Initializable {
            String gamename=rs.getString("game_name");
            String companyname=rs.getString("game_company");
            String genre=rs.getString("game_genre");
-           double rating=rs.getDouble("game_rating");
+//           double rating=rs.getDouble("game_rating");
            String gameimage=rs.getString("game_icon");
            String gamebg=rs.getString("game_thumbnail");
            String desc=rs.getString("game_desc");
@@ -247,7 +251,7 @@ public class HomepageController implements Initializable {
            AnchorPane card=loader.load();
            GamecardController cardcontroller=loader.getController();
 
-           cardcontroller.setdata(gamename,companyname,genre,rating,gameimage,gamebg,desc,path,status);
+           cardcontroller.setdata(gamename,companyname,genre,gameimage,gamebg,desc,path,status);
            if(type.equalsIgnoreCase("games")){
                gamebox.getChildren().add(card);}
            else{

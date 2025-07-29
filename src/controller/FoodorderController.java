@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -55,8 +56,10 @@ public class FoodorderController implements Initializable {
     private Button btnCart;
     @FXML
     private AnchorPane orderContainer;
-      @FXML
+    @FXML
     private Circle noti;
+    @FXML
+    private ScrollPane scrollp;
     
     public ArrayList<cartItem> cartlist = new ArrayList<>();
     
@@ -236,22 +239,27 @@ public class FoodorderController implements Initializable {
 
     // Trigger custom logic
     if (btn == btnAllitems) {
+        scrollp.setVvalue(0);
         setcategory(Granularity.allItems);
         loadFoodData();
     } else if (btn == btnMeals) {
+        scrollp.setVvalue(0);
         setcategory(Granularity.meals);
         loadFoodData();
         
     } else if (btn == btnSnacks) {
+        scrollp.setVvalue(0);
         setcategory(Granularity.snacks);
         loadFoodData();
         
     }else if(btn==btnDrinks){
+        scrollp.setVvalue(0);
         setcategory(Granularity.drinks);
         loadFoodData();
        
             
     }else if(btn==btnDesserts){
+        scrollp.setVvalue(0);
         setcategory(Granularity.desserts);
         loadFoodData();
             

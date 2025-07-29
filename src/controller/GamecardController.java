@@ -64,7 +64,7 @@ public class GamecardController implements Initializable {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gamemodal.fxml"));    
         AnchorPane popup=loader.load();
         GamemodalController controller=loader.getController();
-        controller.setdata(gamename,companyname,genre,rating,gameimage,gamebg,desc,path,status);
+        controller.setdata(gamename,companyname,genre,gameimage,gamebg,desc,path,status);
         Stage popupstage=new Stage();
         popupstage.initModality(Modality.APPLICATION_MODAL);
         popupstage.setTitle("Select Package");
@@ -72,11 +72,11 @@ public class GamecardController implements Initializable {
         popupstage.showAndWait();
     }
 
-    void setdata(String gamename, String companyname, String genre, double rating, String gameimage, String gamebg, String desc, String path, String status) {
+    void setdata(String gamename, String companyname, String genre, String gameimage, String gamebg, String desc, String path, String status) {
         this.gamename=gamename;
         this.companyname=companyname;
         this.genre=genre;
-        this.rating=rating;
+//        this.rating=rating;
         this.gameimage=gameimage;
         this.gamebg=gamebg;
         this.desc=desc;
