@@ -22,9 +22,10 @@ public class Internet_Cafe_client extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         this.stage=stage;
+            client c = client.getInstance();
+            c.setPrimaryStage(stage);
         new Thread(() -> {
-            client c = new client();
-             c.setPrimaryStage(stage);
+
             c.startClient();
         }).start();
         

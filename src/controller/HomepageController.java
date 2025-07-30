@@ -48,7 +48,7 @@ public class HomepageController implements Initializable {
     @FXML
     private ScrollPane scrollpp;
     
-    private client c;
+    private client c=client.getInstance();
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
@@ -264,7 +264,8 @@ public class HomepageController implements Initializable {
 
     
     public void setClient(client c) {
-        this.c = c;
+        this.c=client.getInstance();
+        
     }
     
     private int getpackageid(String packagename) throws SQLException{
