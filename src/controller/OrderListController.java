@@ -74,16 +74,20 @@ public class OrderListController implements Initializable {
 // Remove trailing semicolon
 if (sb.length() > 0) sb.setLength(sb.length() - 1);
 
-String message = "FoodOrder|" + sb.toString();
-c.sendToServer(message);
-        
+    String message = "FoodOrder|" + sb.toString();
+    c.sendToServer(message);
+
+    btnReset.fire();
+    mainController.CartOnOff();
 
     }
 
     @FXML
     void HandleResetAction(ActionEvent event) {
-        mainController.removeAllCart();
-        updateCartView();
+        mainController.removeAllCart();      // Clear main controller list
+    cartlist.clear();                    // Clear local list too!
+    orderFlowPane.getChildren().clear(); // Refresh UI
+        orderFlowPane.getChildren().clear();
     }
 
     private HBox createItemBox(cartItem item) {
@@ -110,8 +114,9 @@ trashView.setMouseTransparent(true);
         // Delete button
         Button deleteBtn = new Button();
         deleteBtn.setOnAction(e -> {
-            mainController.removeFromCart(item);   // Remove from ArrayList
-            updateCartView();         // Refresh UI
+        removeItemFromOrderList(item);
+        mainController.syncCartFromOrderList(cartlist); // Sync back
+         updateCartView();
         });
         
         deleteBtn.setStyle("-fx-pref-width:30px; -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding:0;");
@@ -136,17 +141,36 @@ trashView.setMouseTransparent(true);
     }
      
     public void initCart(ArrayList<cartItem> cartItems, FoodorderController mainController) {
-        if(cartItems.isEmpty()){
-            System.out.println("null afffffffffffffffffffffffffff");
-        }
-        else{
-            System.out.println("notttttttttttt null afffffffffffffffffffffffffff");
-        }
-    this.cartlist = cartItems;
+    this.cartlist = mergeDuplicateItems(cartItems);
     this.mainController = mainController;
     updateCartView();
-    
 }
+
+    
+    private List<cartItem> mergeDuplicateItems(List<cartItem> items) {
+    List<cartItem> merged = new ArrayList<>();
+    
+    for (cartItem current : items) {
+        boolean found = false;
+        for (cartItem existing : merged) {
+            if (existing.getFoodname().equalsIgnoreCase(current.getFoodname())) {
+                existing.setQty(existing.getQty() + current.getQty());
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            merged.add(new cartItem(current.getFoodname(), current.getPrice(), current.getQty()));
+        }
+    }
+    
+    return merged;
+}
+public void removeItemFromOrderList(cartItem item) {
+    cartlist.removeIf(i -> i.getFoodname().equalsIgnoreCase(item.getFoodname()));
+    updateCartView();
+}
+
 
   
 
