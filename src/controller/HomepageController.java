@@ -54,6 +54,7 @@ public class HomepageController implements Initializable {
     private ResultSet rs;
     private int userId;
     private int pcid;
+    private int saleid;
     private String username;
     private String email;
     private String userimage;
@@ -160,6 +161,7 @@ public class HomepageController implements Initializable {
         userId = Integer.parseInt(userid.replaceAll("\\[|\\]", ""));
         pcid = Integer.parseInt(pcName.replaceAll("[^0-9]", ""));
         loadgames(packageName);
+        getsaleid();
         String sql = "SELECT * FROM users WHERE customer_id = ?";
         pst = con.prepareStatement(sql);
         pst.setInt(1, userId);
@@ -318,17 +320,29 @@ public class HomepageController implements Initializable {
     }
     
     private void getperiod() throws SQLException{
-        String gettime="Select period from sale_detail where customer_id = ? and pc_id = ? and status_id = 2";
+        String gettime="Select period,sale_id from sale_detail where customer_id = ? and pc_id = ? and status_id = 2";
         pst=con.prepareStatement(gettime);
         pst.setInt(1, userId);
         pst.setInt(2, pcid);
         rs=pst.executeQuery();
         if(rs.next()){
             orgduration=rs.getInt("period");
+            saleid=rs.getInt("sale_id");
         }
         System.out.println("Original period is "+orgduration);
     }
-
+    
+    private void getsaleid() throws SQLException{
+        String getsaleid="Select sale_id from sale_detail where customer_id = ? and pc_id = ? and status_id = 2";
+        pst=con.prepareStatement(getsaleid);
+        pst.setInt(1, userId);
+        pst.setInt(2, pcid);
+        rs=pst.executeQuery();
+        if(rs.next()){
+            saleid=rs.getInt("sale_id");
+        }
+    }
+    
     public void terminatesession(){
         try {
             if (!Platform.isFxApplicationThread()) {
@@ -342,19 +356,19 @@ public class HomepageController implements Initializable {
             stage.centerOnScreen();
             stage.show();
             
-            Stage stage2 = (Stage) btnaddtime.getScene().getWindow();
+            Stage stage2 = (Stage) btnorderfood.getScene().getWindow();
             stage2.close();
             
-            String sql = "UPDATE sale_detail SET status_id = 3 WHERE customer_id = ? AND pc_id = ? AND status_id = 2";
-            pst = con.prepareStatement(sql);
+            String updatesql = "UPDATE sale_detail SET status_id = 3 WHERE customer_id = ? AND pc_id = ? AND status_id = 2";
+            pst = con.prepareStatement(updatesql);
             pst.setInt(1, userId);
             pst.setInt(2, pcid);
             pst.executeUpdate();
-            String sql2 ="update pcs set status_id=1 where pc_id= ?";
+            String sql2 ="update pcs set status_id = 1 where pc_id= ?";
             pst=con.prepareStatement(sql2);
             pst.setInt(1, pcid);
             pst.executeUpdate();
-            c.sendToServer("SESSION_END|"+pcid);
+            c.sendToServer("SESSION_END|"+pcid+"|"+saleid);
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

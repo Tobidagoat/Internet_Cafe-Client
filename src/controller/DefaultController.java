@@ -17,73 +17,75 @@ public class DefaultController implements Initializable {
     @FXML private Button btnGame;
     @FXML private Button btnFood;
     @FXML private AnchorPane containerPane;
-    
+
     private client client;
     private HomepageController homepageController;
-    
+    private AnchorPane homepagePane;
+    private AnchorPane foodPane;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnGame.fire();
-    } 
-    
-    @FXML
-    void HandleFoodAction(ActionEvent event) throws IOException {
-        loadUI("/view/foodorder.fxml");
+        try {
+            // Preload homepage
+            FXMLLoader homepageLoader = new FXMLLoader(getClass().getResource("/view/homepage.fxml"));
+            homepagePane = homepageLoader.load();
+            homepageController = homepageLoader.getController();
+            homepageController.setClient(client);
+
+            // Optional: Preload food order pane if you want similar behavior
+            FXMLLoader foodLoader = new FXMLLoader(getClass().getResource("/view/foodorder.fxml"));
+            foodPane = foodLoader.load();
+
+            // Add homepage by default
+            containerPane.getChildren().setAll(homepagePane);
+            anchorPaneFill(homepagePane);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Optionally trigger the default button if needed
+        // btnGame.fire();
     }
 
     @FXML
-    void HandleGameAction(ActionEvent event) throws IOException {
-        loadHomepage();
+    void HandleFoodAction(ActionEvent event) {
+        containerPane.getChildren().setAll(foodPane);
+        anchorPaneFill(foodPane);
     }
-    
-    private void loadHomepage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homepage.fxml"));
-        AnchorPane newLoadedPane = loader.load();
-        containerPane.getChildren().clear();
-        containerPane.getChildren().add(newLoadedPane);
-        
-        AnchorPane.setTopAnchor(newLoadedPane, 0.0);
-        AnchorPane.setLeftAnchor(newLoadedPane, 0.0);
-        AnchorPane.setBottomAnchor(newLoadedPane, 0.0);
-        AnchorPane.setRightAnchor(newLoadedPane, 0.0);
-        
-        homepageController = loader.getController();
-        homepageController.setClient(client);
+
+    @FXML
+    void HandleGameAction(ActionEvent event) {
+        containerPane.getChildren().setAll(homepagePane);
+        anchorPaneFill(homepagePane);
     }
-    
-    private void loadUI(String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        AnchorPane newLoadedPane = loader.load();
-        containerPane.getChildren().clear();
-        containerPane.getChildren().add(newLoadedPane);
-        
-        AnchorPane.setTopAnchor(newLoadedPane, 0.0);
-        AnchorPane.setLeftAnchor(newLoadedPane, 0.0);
-        AnchorPane.setBottomAnchor(newLoadedPane, 0.0);
-        AnchorPane.setRightAnchor(newLoadedPane, 0.0);
+
+    private void anchorPaneFill(AnchorPane pane) {
+        AnchorPane.setTopAnchor(pane, 0.0);
+        AnchorPane.setBottomAnchor(pane, 0.0);
+        AnchorPane.setLeftAnchor(pane, 0.0);
+        AnchorPane.setRightAnchor(pane, 0.0);
     }
-    
+
     public void setClient(client client) {
         this.client = client;
-    }
-    
-    public void setSessionData(String pcName, String userid, String room, String packageName, int duration) throws SQLException, IOException {
-        // Forward session data to homepage controller if it exists
         if (homepageController != null) {
-            homepageController.setSessionData(pcName, userid, room, packageName, duration);
-        } else {
-            // If homepage isn't loaded yet, load it first
-            loadHomepage();
+            homepageController.setClient(client);
+        }
+    }
+
+    public void setSessionData(String pcName, String userid, String room, String packageName, int duration) throws SQLException, IOException {
+        if (homepageController != null) {
             homepageController.setSessionData(pcName, userid, room, packageName, duration);
         }
     }
-    
+
     public void terminateSession() {
         if (homepageController != null) {
             homepageController.terminatesession();
         }
     }
-    
+
     public void addTime(int extraTime) {
         if (homepageController != null) {
             try {

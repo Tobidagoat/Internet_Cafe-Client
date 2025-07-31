@@ -33,6 +33,10 @@ public class client {
         this.clientName = config.getPcId();
         this.host = config.getHost();
         this.port = config.getPort();
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+        stopClient();
+    }));
     }
 
     // Singleton access method
@@ -58,6 +62,38 @@ public class client {
         } catch (IOException e) {
             System.out.println("❌ Failed to connect to server.");
             e.printStackTrace();
+        }
+    }
+    
+
+    public void stopClient() {
+        try {
+            // Close the output stream first
+            if (out != null) {
+                out.close();
+                out = null;
+            }
+
+            // Close the input stream
+            if (in != null) {
+                in.close();
+                in = null;
+            }
+
+            // Close the socket
+            if (socket != null) {
+                socket.close();
+                socket = null;
+            }
+
+            System.out.println("🛑 Client stopped successfully");
+        } catch (IOException e) {
+            System.out.println("❌ Error while stopping client: " + e.getMessage());
+        } finally {
+            // Ensure resources are null even if an exception occurs
+            out = null;
+            in = null;
+            socket = null;
         }
     }
 
