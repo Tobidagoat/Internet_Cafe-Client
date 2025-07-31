@@ -137,16 +137,9 @@ public class FoodorderController implements Initializable {
           
          controller = loader.getController();
         controller.initCart(cartlist, this);
-        if(!isModalOpen ){
-          
-        orderContainer.setVisible(true);
-        isModalOpen=true;
-        }
-        else{
-            orderContainer.setVisible(false);
-            isModalOpen=false;
-        }
-        noti.setVisible(false);
+        
+        CartOnOff();
+                noti.setVisible(false);
 
         
         
@@ -207,20 +200,38 @@ public class FoodorderController implements Initializable {
     
    
 
-    public void addToCart(cartItem item) {
-      if (cartlist == null) {
+    public void addToCart(cartItem newItem) {
+    if (cartlist == null) {
         System.out.println("❌ cartList is NULL");
+        cartlist = new ArrayList<>();
     } else {
         System.out.println("✅ cartList is fine. Size before add: " + cartlist.size());
     }
-    cartlist.add(item);
-        for(cartItem i : cartlist){
-            System.out.println(i);
-        }
 
-        controller.initCart(cartlist, this);
-        
+    boolean found = false;
+    for (cartItem existingItem : cartlist) {
+        if (existingItem.getFoodname().equalsIgnoreCase(newItem.getFoodname())) {
+            // Item already exists, increase qty
+            existingItem.setQty(existingItem.getQty() + newItem.getQty());
+            found = true;
+            System.out.println("🔁 Increased quantity of: " + newItem.getFoodname());
+            break;
+        }
     }
+
+    if (!found) {
+        cartlist.add(newItem);
+        System.out.println("➕ Added new item: " + newItem.getFoodname());
+    }
+
+    // Show updated cart content
+    for (cartItem i : cartlist) {
+        System.out.println("🛒 " + i.getFoodname() + " | Qty: " + i.getQty());
+    }
+
+    controller.initCart(new ArrayList<>(cartlist), this); // Clone list to be safe
+}
+
     public void removeFromCart(cartItem item){
         cartlist.remove(item);
     }
@@ -293,8 +304,24 @@ public class FoodorderController implements Initializable {
        }
            
    }
+   public void CartOnOff(){
+    if(!isModalOpen ){
+          
+        orderContainer.setVisible(true);
+        isModalOpen=true;
+        }
+        else{
+            orderContainer.setVisible(false);
+            isModalOpen=false;
+        }
+
+}
       
-     
+     public void syncCartFromOrderList(List<cartItem> updatedCart) {
+    this.cartlist.clear();
+    this.cartlist.addAll(updatedCart);
+}
+
      
     }
 

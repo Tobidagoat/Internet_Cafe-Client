@@ -31,13 +31,13 @@ public class Internet_Cafe_client extends Application {
         
         
         
-        Parent root = FXMLLoader.load(getClass().getResource("/view/test.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/view/test.fxml"));
         
         //testing code
         
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Default.fxml"));
-//        
-//        Parent root = loader.load(); 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Default.fxml"));
+        
+        Parent root = loader.load(); 
         Scene scene = new Scene(root);        
         stage.setScene(scene);
         stage.show();
