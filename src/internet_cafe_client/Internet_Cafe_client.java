@@ -5,12 +5,14 @@
 package internet_cafe_client;
 
 import controller.HomepageController;
+import controller.TestController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -31,18 +33,18 @@ public class Internet_Cafe_client extends Application {
         
         
         
-//        Parent root = FXMLLoader.load(getClass().getResource("/view/test.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/test.fxml"));
         
         //testing code
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Default.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Default.fxml"));
         
-        Parent root = loader.load(); 
-        Scene scene = new Scene(root);        
+       // Parent root = loader.load(); 
+        
+        Scene scene = new Scene(root);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
-        
-        
     }
 
     /**

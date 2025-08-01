@@ -5,6 +5,7 @@
 package controller;
 
 import static internet_cafe_client.Internet_Cafe_client.stage;
+import internet_cafe_client.client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,8 +17,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -28,6 +33,7 @@ public class TestController implements Initializable {
     
     Parent root;
     public static Stage adminStage;
+    public Stage mainstage=internet_cafe_client.Internet_Cafe_client.stage;
     
     
     @FXML
@@ -35,10 +41,30 @@ public class TestController implements Initializable {
     
      @FXML
     private AnchorPane containerPane;
+    @FXML
+    private MediaView bgvideo;
+    @FXML
+    private Button btnclose;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+        String videoPath = getClass().getResource("/img/bg_video.mp4").toExternalForm();
+
+        Media media = new Media(videoPath);
+        MediaPlayer player = new MediaPlayer(media);
+
+        player.setCycleCount(MediaPlayer.INDEFINITE);
+        player.setStartTime(Duration.ZERO);
+        player.setStopTime(media.getDuration());
+        player.setMute(true);
+        bgvideo.setPreserveRatio(false);
+        bgvideo.setMediaPlayer(player);
+
+        bgvideo.setSmooth(true);
+        bgvideo.setCache(true);
+        player.play();
+        
     }  
     
       @FXML
@@ -73,6 +99,12 @@ public class TestController implements Initializable {
     
     public void paneclose(){
         containerPane.getChildren().clear();
+    }
+
+    @FXML
+    private void btncloseaction(ActionEvent event) {
+        mainstage.close();
+        client.getInstance().stopClient();
     }
     
     

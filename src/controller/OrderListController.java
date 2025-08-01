@@ -78,7 +78,7 @@ if (sb.length() > 0) sb.setLength(sb.length() - 1);
 
 
     String message = "FoodOrder|" + sb.toString();
-    c.sendToServer(message);
+    client.getInstance().sendToServer(message);
 
     btnReset.fire();
     mainController.CartOnOff();

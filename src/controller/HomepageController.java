@@ -26,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javax.swing.*;
 
@@ -353,6 +354,7 @@ public class HomepageController implements Initializable {
             root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.centerOnScreen();
             stage.show();
             
