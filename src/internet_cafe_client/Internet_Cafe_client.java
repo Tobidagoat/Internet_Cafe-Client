@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -35,10 +36,12 @@ public class Internet_Cafe_client extends Application {
         
         //testing code
         
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Default.fxml"));
-//        
-//        Parent root = loader.load(); 
-        Scene scene = new Scene(root);        
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Default.fxml"));
+        
+       // Parent root = loader.load(); 
+        
+        Scene scene = new Scene(root);
+        stage.initStyle(StageStyle.UNDECORATED);        
         stage.setScene(scene);
         stage.show();
         
