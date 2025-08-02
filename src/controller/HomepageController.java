@@ -6,6 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -24,6 +28,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -44,6 +50,10 @@ public class HomepageController implements Initializable {
     @FXML private TextField txtsearchbar;
     @FXML private FlowPane gamebox;
     @FXML private FlowPane othersbox;
+    
+    @FXML
+    private Button btnEditPfp;
+    
     
     @FXML
     private ScrollPane scrollpp;
@@ -78,6 +88,9 @@ public class HomepageController implements Initializable {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
         txtsearchbar.textProperty().addListener((obs, oldText, newText) -> searchgames(newText));
+        
+        
+        loadimg(userimage, userprofile);
     }
 
     @FXML
@@ -117,6 +130,39 @@ public class HomepageController implements Initializable {
 
     @FXML
     private void btnorderfoodaction(ActionEvent event) {
+        
+    }
+    @FXML
+    void HandleEditPfpAction(ActionEvent event) throws IOException, SQLException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Game Icon Picture");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png","*.jpg","*.jpeg"));
+        Stage stage = (Stage)btnEditPfp.getScene().getWindow();
+        File selectedFile  = fileChooser.showOpenDialog(stage);
+        
+        
+           // FOR TESTING NEED TO CHANGE AFTER COMPILE
+            Path targetDir = Paths.get("D:/Internet_cafe_2.0/Internet_Cafe-Client/src/img");
+            
+            //USE AFTER COMPILE AS JAR FR
+//            Path targetDir = Paths.get(System.getProperty("user.dir"), "img");
+
+            Files.createDirectories(targetDir);
+            
+            //COPY IMAGE INTO /img
+            Path target = targetDir.resolve(selectedFile.getName());
+            Files.copy(selectedFile.toPath(), target, StandardCopyOption.REPLACE_EXISTING);
+            
+            String newpic = selectedFile.getName();
+            String sql = "Update users set profile_pic = ? where customer_id = ?";
+            pst = con.prepareStatement(sql);
+            pst.setString(1, newpic);
+            pst.setInt(2, userId);
+            pst.executeUpdate();
+            
+            userprofile.setImage(null);
+            loadimg(newpic, userprofile);
+            
         
     }
 
@@ -176,10 +222,11 @@ public class HomepageController implements Initializable {
         lbemail.setText(email);
         lbusername.setText(username);
        
-        File file = new File("src/img/"+userimage);
-        Image image = new Image(file.toURI().toString());
-        userprofile.setImage(image);
-
+//        File file = new File("src/img/"+userimage);
+//        Image image = new Image(file.toURI().toString());
+//        userprofile.setImage(image);
+ 
+        loadimg(userimage, userprofile);
         lbroomindicator.setText(room);
         startCountdown(duration);
 
@@ -356,7 +403,7 @@ public class HomepageController implements Initializable {
             stage.centerOnScreen();
             stage.show();
             
-            Stage stage2 = (Stage) btnorderfood.getScene().getWindow();
+            Stage stage2 = (Stage) lbusername.getScene().getWindow();
             stage2.close();
             
             String updatesql = "UPDATE sale_detail SET status_id = 3 WHERE customer_id = ? AND pc_id = ? AND status_id = 2";
@@ -375,4 +422,61 @@ public class HomepageController implements Initializable {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+    private void loadimg(String imgName, ImageView imageview) {
+        
+              // FOR TESTING NEED TO CHANGE AFTER COMPILE
+            Path targetDir = Paths.get("D:/Internet_cafe_2.0/Internet_Cafe-Client/src/img");
+            
+            //USE AFTER COMPILE AS JAR FR
+//            Path targetDir = Paths.get(System.getProperty("user.dir"), "img");
+        
+    // Apply circular clip
+    
+     Circle clip = new Circle(
+        imageview.getFitWidth() / 2,
+        imageview.getFitHeight() / 2,
+        imageview.getFitWidth() / 2
+    );
+
+    imageview.setClip(clip);
+
+    // Defensive check for null or empty imgName
+    if (imgName == null || imgName.trim().isEmpty()) {
+        setDefaultImage(imageview);
+        return;
+    }
+
+    // File path setup
+    File file = new File(targetDir + File.separator + imgName);
+
+    if (file.exists()) {
+        Image image = new Image(
+            file.toURI().toString(),
+            550, 550, true, true, true
+        );
+        imageview.setImage(image);
+    } else {
+        setDefaultImage(imageview);
+    }
+
+    imageview.setFitWidth(120);
+    imageview.setFitHeight(120);
+    imageview.setPreserveRatio(false); // force full fit
+
+    
+    imageview.setSmooth(true);
+    imageview.setCache(true);
+}
+    
+     private void setDefaultImage(ImageView imageview) {
+    try {
+        // Use resource fallback or a static file path as backup
+        Image defaultImg = new Image(getClass().getResourceAsStream("/img/Default_user.png"));
+        imageview.setImage(defaultImg);
+    } catch (Exception e) {
+        System.out.println("Default image not found: " + e.getMessage());
+    }
+}
 }
