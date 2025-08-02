@@ -5,6 +5,7 @@
 package internet_cafe_client;
 
 import controller.HomepageController;
+import controller.TestController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,11 +42,13 @@ public class Internet_Cafe_client extends Application {
        // Parent root = loader.load(); 
         
         Scene scene = new Scene(root);
+<<<<<<< HEAD
         stage.initStyle(StageStyle.UNDECORATED);        
+=======
+        stage.initStyle(StageStyle.UNDECORATED);
+>>>>>>> b2da69c0717cd75511656bc8f0f640a48814631a
         stage.setScene(scene);
         stage.show();
-        
-        
     }
 
     /**
