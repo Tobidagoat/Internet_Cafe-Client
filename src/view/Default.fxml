@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -12,6 +15,14 @@
             <Button fx:id="btnFood" layoutX="3.0" layoutY="331.0" mnemonicParsing="false" onAction="#HandleFoodAction" prefHeight="36.0" prefWidth="99.0" style="-fx-background-color: transparent;" text="Food" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <FontIcon disable="true" iconColor="#ff6a00" iconLiteral="fa-gamepad" iconSize="40" layoutX="30.0" layoutY="263.0" mouseTransparent="true" />
             <FontIcon disable="true" iconColor="#ff6a00" iconLiteral="fa-coffee" iconSize="35" layoutX="29.0" layoutY="361.0" mouseTransparent="true" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="11.2" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/CC1.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.22" contrast="0.81" saturation="0.65" />
+               </effect>
+            </ImageView>
          </children></AnchorPane>
       <AnchorPane fx:id="containerPane" layoutX="554.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="810.0" prefWidth="200.0" styleClass="content_anchor_pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
