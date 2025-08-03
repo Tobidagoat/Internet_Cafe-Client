@@ -2,14 +2,14 @@
 .background_anchor_pane{
     -fx-background-color:#202225;
     -fx-pref-width:1550px;
-    -fx-pref-height:800px;
+    -fx-pref-height:840px;
 
 }
 
 .content_anchor_pane{
     -fx-background-color:#202225;
     -fx-pref-width:1450px;
-    -fx-pref-height:800px;
+    -fx-pref-height:840px;
     -fx-border-width: 0 0 0  1px;
     -fx-border-color:#494949;
 
@@ -17,7 +17,7 @@
 .sidebar_anchor_pane{
     -fx-background-color:#292b2f;
     -fx-pref-width:100px;
-    -fx-pref-height:800px;
+    -fx-pref-height:840px;
     -fx-border-width:0 1px 0 0;
     -fx-border-color:#494949;
    
@@ -260,7 +260,7 @@
 .user-profile-card{
     -fx-background-color:#292b2f;
     -fx-pref-width:350px;
-    -fx-pref-height:800px;
+    -fx-pref-height:840px;
     -fx-border-width:0 0 0 1px;
     -fx-border-color:#323232;
 

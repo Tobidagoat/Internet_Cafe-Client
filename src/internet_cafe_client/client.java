@@ -139,14 +139,13 @@ public class client {
                         defaultController.setClient(client.getInstance()); // Fixed this line
                         defaultController.setSessionData(pcName, userid, room, packageName, duration);
                         
-                        Stage stage = new Stage();
-                        stage.setScene(new Scene(root));
-                        stage.centerOnScreen();
-                        stage.show();
-
                         if (primaryStage != null) {
-                            primaryStage.close();
-                        }
+                        primaryStage.setScene(new Scene(root));
+                    } else {
+                        primaryStage = new Stage();
+                        primaryStage.setScene(new Scene(root));
+                        primaryStage.show();
+                    }
                     } catch (IOException | SQLException ex) {
                         Logger.getLogger(client.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -173,7 +172,31 @@ public class client {
                     }
                 });
             }
-        } else {
+        } else if (msg.startsWith("CONFIRMATION|")) {
+    String[] parts = msg.split("\\|");
+    if(parts.length == 2) {
+        String value = parts[1];
+
+        if (value.equals("Food Order Request Accepted.")) {
+            String reply = "Your Order Has Been Accepted.";
+            defaultController.showFloatingModal(reply);
+
+        } else if (value.equals("Food Order Request Declined.")) {
+            String reply = "Your Order Has Been Declined.";
+            defaultController.showFloatingModal(reply);
+
+        } else if (value.equals("Time Request Accepted.")) {
+            String reply = "Your Time Request Has Been Accepted.";
+            defaultController.showFloatingModal(reply);
+
+        } else if (value.equals("Time Request Declined.")) {
+            String reply = "Your Time Request Has Been Declined.";
+            defaultController.showFloatingModal(reply);
+        }
+    }
+}
+
+        else {
             System.out.println("📩 Server says: " + msg);
         }
     }

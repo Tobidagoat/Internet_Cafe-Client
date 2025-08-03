@@ -47,10 +47,11 @@ public class HomepageController implements Initializable {
     @FXML private Label lbroomindicator;
     @FXML private Button btnaddtime;
     @FXML private Button btnendsession;
-    @FXML private Button btnorderfood;
+    
     @FXML private TextField txtsearchbar;
     @FXML private FlowPane gamebox;
     @FXML private FlowPane othersbox;
+    
     
     @FXML
     private Button btnEditPfp;
@@ -78,6 +79,8 @@ public class HomepageController implements Initializable {
     
     private String searchg="";
     private String pkname;
+    
+    private DefaultController defaultController;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -129,10 +132,7 @@ public class HomepageController implements Initializable {
                     }
     }
 
-    @FXML
-    private void btnorderfoodaction(ActionEvent event) {
-        
-    }
+    
     @FXML
     void HandleEditPfpAction(ActionEvent event) throws IOException, SQLException {
         FileChooser fileChooser = new FileChooser();
@@ -391,23 +391,13 @@ public class HomepageController implements Initializable {
         }
     }
     
-    public void terminatesession(){
+        public void terminatesession(){
         try {
             if (!Platform.isFxApplicationThread()) {
                 Platform.runLater(this::terminatesession);
                 return;
             }
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/test.fxml"));
-            root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.centerOnScreen();
-            stage.show();
-            
-            Stage stage2 = (Stage) lbusername.getScene().getWindow();
-            stage2.close();
-            
+
             String updatesql = "UPDATE sale_detail SET status_id = 3 WHERE customer_id = ? AND pc_id = ? AND status_id = 2";
             pst = con.prepareStatement(updatesql);
             pst.setInt(1, userId);
@@ -418,8 +408,10 @@ public class HomepageController implements Initializable {
             pst.setInt(1, pcid);
             pst.executeUpdate();
             c.sendToServer("SESSION_END|"+pcid+"|"+saleid);
-        } catch (IOException ex) {
-            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+            
+            if (defaultController != null) {
+                defaultController.returnToTestScreen();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -481,4 +473,8 @@ public class HomepageController implements Initializable {
         System.out.println("Default image not found: " + e.getMessage());
     }
 }
+     
+     public void setParentcontroller(DefaultController defaultController) {
+        this.defaultController = defaultController;
+    }
 }

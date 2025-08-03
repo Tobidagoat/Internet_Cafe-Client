@@ -42,11 +42,11 @@ public class Internet_Cafe_client extends Application {
        // Parent root = loader.load(); 
         
         Scene scene = new Scene(root);
-<<<<<<< HEAD
-        stage.initStyle(StageStyle.UNDECORATED);        
-=======
-        stage.initStyle(StageStyle.UNDECORATED);
->>>>>>> b2da69c0717cd75511656bc8f0f640a48814631a
+
+        stage.initStyle(StageStyle.UNDECORATED); 
+        stage.centerOnScreen();
+        stage.setMaximized(true);
+
         stage.setScene(scene);
         stage.show();
     }
