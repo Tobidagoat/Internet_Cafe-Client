@@ -99,7 +99,7 @@ public class TimeselectorController implements Initializable {
     } else if (clickedPane == option3) {
         selectedtime = 60*180;
     } else if (clickedPane == option4) {
-        selectedtime = 0;
+        selectedtime = 60*240;
     }
 
     System.out.println("🕒 Selected time: " + selectedtime + " seconds");
