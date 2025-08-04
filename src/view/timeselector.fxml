@@ -54,7 +54,7 @@
       </AnchorPane>
       <AnchorPane fx:id="option4" layoutX="275.0" layoutY="318.0" onMouseClicked="#onclick" onMousePressed="#onpress" onMouseReleased="#onrelease" prefHeight="150.0" prefWidth="200.0" style="-fx-border-width: 1.3; -fx-border-color: #92BCFA; -fx-background-radius: 10px; -fx-border-radius: 10px;" styleClass="time-option" stylesheets="@../css/style.css">
          <children>
-            <Label layoutX="23.0" layoutY="64.0" text="Add Custom Time" wrapText="true">
+            <Label layoutX="66.0" layoutY="64.0" text="4 Hours" wrapText="true">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
