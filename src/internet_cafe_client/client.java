@@ -47,23 +47,43 @@ public class client {
         return instance;
     }
 
-    public void startClient() {
-        try {
-            socket = new Socket(host, port);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
+   public void startClient() {
+    
+    new Thread(() -> {
+        while (true) {
+            try {
+                System.out.println("⌛ Attempting to connect to server...");
+                socket = new Socket();
+                // Set a connection timeout (5 seconds) to prevent indefinite hanging on unreachable hosts
+                socket.connect(new InetSocketAddress(host, port), 5000);
+                
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out = new PrintWriter(socket.getOutputStream(), true);
 
-            out.println(clientName);
-            System.out.println("✅ Connected to server as: " + clientName +
-                    " (Host: " + host + ", Port: " + port + ")");
+                out.println(clientName);
+                System.out.println("✅ Connected to server as: " + clientName +
+                        " (Host: " + host + ", Port: " + port + ")");
 
-            new Thread(this::receiveMessages).start();
+                receiveMessages(); // This will block until connection is lost
+                
+            } catch (IOException e) {
+                System.out.println("❌ Connection failed: " + e.getMessage());
+            } finally {
+                stopClient();
+            }
 
-        } catch (IOException e) {
-            System.out.println("❌ Failed to connect to server.");
-            e.printStackTrace();
+            // Wait before attempting to reconnect
+            try {
+                System.out.println("⏳ Retrying in 5 seconds...");
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.out.println("🛑 Connection thread interrupted");
+                return;
+            }
         }
-    }
+    }).start();
+}
     
 
     public void stopClient() {
